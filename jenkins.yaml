@@ -1,0 +1,16 @@
+pipeline:
+  agent:
+    docker:
+      image: node:10.15.3
+      reuseNode: "true"
+  stages:
+  - stage: default0
+    parallel:
+    - stage: Build and Test
+      steps:
+      - sh "npm install"
+      - sh "npm test"
+    - stage: Code linting
+      steps:
+      - sh "npm install eslint"
+      - sh "npx eslint ."
